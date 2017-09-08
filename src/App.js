@@ -4,14 +4,16 @@ import './App.css';
 
 class App extends Component {  
 
+  // Function to call the increment dispatching event
   incrementCount(){
-    const { store, actionsCreators:{ incrementActionCreator } } = this.props;
-    store.dispatch(incrementActionCreator);
+    const { incrementCount} = this.props;
+    incrementCount();
   }
 
+  // Function to call the decrement dispatching event
   decrementCount(){
-    const { store, actionsCreators:{ decrementActionCreator } } = this.props;
-    store.dispatch(decrementActionCreator);
+    const { decrementCount } = this.props;
+    decrementCount();
   }
 
   render() {

@@ -17,9 +17,11 @@ const counterReducer = (state = { count: 0 }, action) => {
         count: state.count + action.payload.value
       });
     case DEC:
-      return Object.assign({}, state, {
-        count: state.count - action.payload.value
-      });
+      return state.count !== 0
+        ? Object.assign({}, state, {
+            count: state.count - action.payload.value
+          })
+        : state;
     default:
       return state;
   }
@@ -37,7 +39,13 @@ const actionsCreators = {
 // Store Listener
 const listenStore = () =>
   render(
-    <App state={store.getState()} actions={actionsCreators} store={store} />,
+    <App
+      state={store.getState()}
+      incrementCount={() =>
+        store.dispatch(actionsCreators.incrementActionCreator())}
+      decrementCount={() =>
+        store.dispatch(actionsCreators.decrementActionCreator())}
+    />,
     document.getElementById("root")
   );
 
